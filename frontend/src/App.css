@@ -1,0 +1,11 @@
+.container {
+  width: 400px;
+  text-align: center;
+  margin: 30px auto 0;
+}
+
+.list-item {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 10px;
+}

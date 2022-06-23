@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "id": 0,
+      "text": "Hello NodeJS"
+    },
+    {
+      "id": 1,
+      "text": "todo app"
+    },
+    {
+      "id": 2,
+      "text": "last TODO"
+    }
+  ]
+}
