@@ -1,3 +1,16 @@
 {
-  "posts": []
+  "posts": [
+    {
+      "id": 0,
+      "text": "fsdfasd"
+    },
+    {
+      "id": 1,
+      "text": "asdfas"
+    },
+    {
+      "id": 2,
+      "text": "fasda"
+    }
+  ]
 }

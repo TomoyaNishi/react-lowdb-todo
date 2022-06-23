@@ -1,8 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import { GetFetch } from "./GetFetch";
-import { PostFetch } from "./PostFetch";
-import { DeleteFetch } from "./DeleteFetch";
+import { GetFetch, PostFetch, DeleteFetch } from "./fetch";
+import { Lists, Button, Input } from "./components";
 
 function App() {
   const [input, setInput] = useState("");
@@ -40,36 +39,10 @@ function App() {
   return (
     <div className="container">
       <div className="input-wrap">
-        <input
-          className="input-form"
-          value={input}
-          onChange={(e) => handleChange(e)}
-        />
-        <button
-          className={disabled ? "is-disabled" : "add-button"}
-          disabled={disabled}
-          onClick={() => addTodo()}
-        >
-          ADD
-        </button>
+        <Input input={input} onClick={handleChange} />
+        <Button disabled={disabled} onClick={addTodo} text="ADD" />
       </div>
-      <ul className="lists">
-        {todos
-          ? todos.map((todo, index) => {
-              return (
-                <li key={index} className="list-item">
-                  <p>{todo.text}</p>
-                  <button
-                    className="delete-button"
-                    onClick={() => deleteTodo(todo.id)}
-                  >
-                    DELETE
-                  </button>
-                </li>
-              );
-            })
-          : null}
-      </ul>
+      <Lists lists={todos} onClick={deleteTodo} />
     </div>
   );
 }
