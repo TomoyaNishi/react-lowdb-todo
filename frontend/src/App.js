@@ -1,39 +1,26 @@
 import "./App.css";
 import { useEffect, useState } from "react";
+import { GetFetch } from "./GetFetch";
+import { PostFetch } from "./PostFetch";
 
 function App() {
   const [input, setInput] = useState("");
   const [todos, setTodos] = useState([]);
 
-  console.log(input);
   const handleChange = (e) => {
     setInput(e.target.value);
   };
 
-  const getTodos = async () => {
-    const res = await fetch("http://localhost:8080/todos", {
-      method: "GET",
-    });
-    const data = await res.json();
-    setTodos(data);
-  };
-
   const handleClick = async () => {
-    const post = await fetch("http://localhost:8080/todos", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: input }),
-    });
-    await post.json();
-    getTodos();
+    await PostFetch("http://localhost:8080/todos", input);
+    GetFetch("http://localhost:8080/todos", setTodos);
     setInput("");
   };
 
   useEffect(() => {
-    getTodos();
+    GetFetch("http://localhost:8080/todos", setTodos);
   }, []);
 
-  console.log(todos);
   return (
     <div className="container">
       <input value={input} onChange={(e) => handleChange(e)} />
