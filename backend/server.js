@@ -23,19 +23,37 @@ app.use((req, res, next) => {
 });
 
 app.get("/todos", (req, res) => {
-  res.send(db.data.posts);
+  try {
+    res.send(db.data.posts);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.post("/todos", async function (req, res) {
   try {
-    const id = posts.slice(-1)[0].id + 1;
+    const postsLength = posts.length;
+    const id = postsLength !== 0 ? posts.slice(-1)[0].id + 1 : 0;
     const text = req.body.text;
     await posts.push({ id: id, text: text });
     db.write();
     res.send({});
     console.log(posts);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+app.delete("/todos", async function (req, res) {
+  try {
+    const id = req.body.id;
+    const newPosts = posts.filter((post) => post.id !== id);
+    db.data.posts = newPosts;
+    db.write();
+    res.send({});
+    console.log(posts);
+  } catch (err) {
+    console.log(err);
   }
 });
 
