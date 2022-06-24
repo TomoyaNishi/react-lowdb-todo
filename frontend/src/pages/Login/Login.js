@@ -1,16 +1,25 @@
 import "./Login.css";
 import { useRef } from "react";
+import { PostFetch } from "../../fetch";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({
+
+    const res = await PostFetch("http://localhost:8080/auth/login", {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     });
+
+    const isStatus = res.status === 200;
+    if (!isStatus) return;
+
+    navigate("/");
   };
 
   return (

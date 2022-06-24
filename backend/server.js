@@ -79,14 +79,17 @@ app.delete("/todos", async function (req, res) {
 });
 
 // USER LOGIN
-app.post("/auth", async function (req, res) {
+app.post("/auth/login", async function (req, res) {
   try {
-    const id = req.body.email;
-    const newPosts = users.some((user) => console.log(user));
-    db.data.posts = newPosts;
-    db.write();
-    res.send({});
-    console.log(posts);
+    const isUser = users.some((user) => user.email === req.body.email);
+    if (!isUser) return res.status(404).send("ユーザーが見つからない");
+
+    const passwordCheck = users.some(
+      (user) => user.password === req.body.password
+    );
+    if (!passwordCheck) return res.status(400).send("パスワードが正しくない");
+
+    res.send({ isLogin: true });
   } catch (err) {
     console.log(err);
   }
