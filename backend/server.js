@@ -22,6 +22,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// TODO取得
 app.get("/todos", (req, res) => {
   try {
     res.send(db.data.posts);
@@ -30,6 +31,7 @@ app.get("/todos", (req, res) => {
   }
 });
 
+// TODO追加
 app.post("/todos", async function (req, res) {
   try {
     const postsLength = posts.length;
@@ -44,6 +46,24 @@ app.post("/todos", async function (req, res) {
   }
 });
 
+// TODO編集
+app.put("/todos", async function (req, res) {
+  try {
+    const id = req.body.id;
+    const text = req.body.text;
+    const newPosts = posts.map((post) =>
+      post.id === id ? { id: post.id, text: text } : post
+    );
+    db.data.posts = newPosts;
+    db.write();
+    res.send({});
+    console.log(posts);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// TODO削除
 app.delete("/todos", async function (req, res) {
   try {
     const id = req.body.id;

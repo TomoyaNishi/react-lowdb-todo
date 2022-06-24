@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { GetFetch, PostFetch, DeleteFetch } from "./fetch";
 import { Lists, Button, Input } from "./components";
+import { UpdateFetch } from "./fetch/UpdateFetch";
 
 function App() {
   const [input, setInput] = useState("");
@@ -17,6 +18,11 @@ function App() {
     GetFetch("http://localhost:8080/todos", setTodos);
     setInput("");
     setDisabled(true);
+  };
+
+  const updateTodo = async (id, text) => {
+    await UpdateFetch("http://localhost:8080/todos", id, text);
+    GetFetch("http://localhost:8080/todos", setTodos);
   };
 
   const deleteTodo = async (id) => {
@@ -42,7 +48,7 @@ function App() {
         <Input input={input} onClick={handleChange} />
         <Button disabled={disabled} onClick={addTodo} text="ADD" />
       </div>
-      <Lists lists={todos} clickDelete={deleteTodo} />
+      <Lists lists={todos} clickUpdate={updateTodo} clickDelete={deleteTodo} />
     </div>
   );
 }
