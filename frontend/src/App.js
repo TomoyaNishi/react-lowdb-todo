@@ -42,7 +42,7 @@ function App() {
         <Input input={input} onClick={handleChange} />
         <Button disabled={disabled} onClick={addTodo} text="ADD" />
       </div>
-      <Lists lists={todos} onClick={deleteTodo} />
+      <Lists lists={todos} clickDelete={deleteTodo} />
     </div>
   );
 }
