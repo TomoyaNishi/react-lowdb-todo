@@ -11,17 +11,14 @@
     {
       "id": 2,
       "text": "Task3"
-    },
-    {
-      "id": 3,
-      "text": "Task4"
     }
   ],
   "users": [
     {
       "id": 0,
       "name": "nishi",
-      "email": "test1@test.com"
+      "email": "test1@test.com",
+      "password": "123456"
     }
   ]
 }

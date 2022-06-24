@@ -1,12 +1,9 @@
-export const UpdateFetch = async (url, id, text) => {
+export const UpdateFetch = async (url, option) => {
   await fetch(url, {
     method: "PUT",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
-    body: JSON.stringify({
-      id: id,
-      text: text,
-    }),
+    body: JSON.stringify(option),
   });
 };

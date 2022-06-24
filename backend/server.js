@@ -9,6 +9,7 @@ const db = new low(adapter);
 await db.read();
 
 const posts = db.data.posts;
+const users = db.data.users;
 
 app.use(express.json());
 app.use((req, res, next) => {
@@ -68,6 +69,20 @@ app.delete("/todos", async function (req, res) {
   try {
     const id = req.body.id;
     const newPosts = posts.filter((post) => post.id !== id);
+    db.data.posts = newPosts;
+    db.write();
+    res.send({});
+    console.log(posts);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// USER LOGIN
+app.post("/auth", async function (req, res) {
+  try {
+    const id = req.body.email;
+    const newPosts = users.some((user) => console.log(user));
     db.data.posts = newPosts;
     db.write();
     res.send({});
