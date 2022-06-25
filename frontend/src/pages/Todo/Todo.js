@@ -13,7 +13,9 @@ export const Todo = () => {
     setInput(e.target.value);
   };
 
-  const addTodo = async () => {
+  const addTodo = async (e) => {
+    e.preventDefault();
+
     await PostFetch("http://localhost:8080/todos", { text: input });
     GetFetch("http://localhost:8080/todos", setTodos);
     setInput("");
@@ -49,16 +51,16 @@ export const Todo = () => {
 
   return (
     <div className="container">
-      <div className="input-wrap">
+      <form className="input-wrap" onSubmit={(e) => addTodo(e)}>
         <TodoInput input={input} onClick={handleChange} />
         <Button
           style="add-button"
           disabled={disabled}
           arg={disabled}
-          onClick={addTodo}
+          onClick={() => {}}
           text="ADD"
         />
-      </div>
+      </form>
       <Lists lists={todos} clickUpdate={updateTodo} clickDelete={deleteTodo} />
     </div>
   );
