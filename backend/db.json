@@ -25,6 +25,12 @@
       "name": "koharu",
       "email": "test2@test.com",
       "password": "abc"
+    },
+    {
+      "id": 2,
+      "name": "tomoya",
+      "email": "test3@test.com",
+      "password": "123456"
     }
   ]
 }

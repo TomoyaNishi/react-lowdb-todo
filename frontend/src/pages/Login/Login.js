@@ -22,6 +22,9 @@ export const Login = () => {
     setError(res.status);
     if (!isStatus) return;
 
+    const json = await res.json();
+    console.log(json);
+
     navigate("/");
   };
 

@@ -16,15 +16,17 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(isMatch);
     setIsMatch(password !== confirmPassword);
     if (password !== confirmPassword) return;
 
-    await PostFetch("http://localhost:8080/auth/register", {
+    const res = await PostFetch("http://localhost:8080/auth/register", {
       name: name,
       email: email,
       password: password,
     });
+
+    const json = await res.json();
+    console.log(json);
 
     navigate("/");
   };
