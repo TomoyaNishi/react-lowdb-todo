@@ -46,8 +46,8 @@
   text-align: center;
 }
 
-/*@media screen and (max-width: 599px) {*/
-/*  .auth-wrap {*/
-/*   */
-/*  }*/
-/*}*/
+@media screen and (max-width: 599px) {
+  .auth-button {
+    font-size: 18px;
+  }
+}

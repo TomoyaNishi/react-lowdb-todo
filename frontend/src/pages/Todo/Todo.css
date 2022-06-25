@@ -5,7 +5,7 @@
 }
 
 body {
-  margin: 0 12px;
+  margin: 0;
   position: relative;
 }
 
@@ -24,6 +24,7 @@ body {
 @media screen and (max-width: 599px) {
   .container {
       margin-top: 60px;
+    padding: 0 12px;
   }
 
   .input-wrap {
