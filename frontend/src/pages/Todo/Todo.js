@@ -1,13 +1,15 @@
 import "./Todo.css";
-import { Button, TodoInput, Lists } from "../../components";
-import { useEffect, useState } from "react";
+import { Button, TodoInput, Lists, Header } from "../../components";
+import { useContext, useEffect, useState } from "react";
 import { DeleteFetch, GetFetch, PostFetch } from "../../fetch";
 import { UpdateFetch } from "../../fetch/UpdateFetch";
+import { UserContext } from "../../context/UserContext";
 
 export const Todo = () => {
   const [input, setInput] = useState("");
   const [todos, setTodos] = useState([]);
   const [disabled, setDisabled] = useState(true);
+  const { user, setUser } = useContext(UserContext);
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -51,6 +53,7 @@ export const Todo = () => {
 
   return (
     <div className="container">
+      <Header user={user} setUser={setUser} />
       <form className="input-wrap" onSubmit={(e) => addTodo(e)}>
         <TodoInput input={input} onClick={handleChange} />
         <Button

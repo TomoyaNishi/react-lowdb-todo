@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: bisque;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.header-text {
+  margin-right: 32px;
+  text-align: left;
+}
+
+.logout {
+  color: palevioletred;
+  cursor: pointer;
+  text-decoration:underline;
+  text-align: left;
+}
+
+@media screen and (max-width: 599px) {
+  .header {
+    display: block;
+  }
+}

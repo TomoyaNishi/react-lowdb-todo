@@ -1,14 +1,16 @@
-import "./Login.css";
-import { useState } from "react";
+import "../Auth.css";
+import { useContext, useState } from "react";
 import { PostFetch } from "../../fetch";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthForm } from "../../components";
+import { UserContext } from "../../context/UserContext";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,20 +21,24 @@ export const Login = () => {
     });
 
     const isStatus = res.status === 200;
-    setError(res.status);
     if (!isStatus) return;
+    setError(res.status);
 
-    const json = await res.json();
-    console.log(json);
+    const data = await res.json();
+    setUser({
+      name: data.name,
+      email: data.email,
+      isAccess: true,
+    });
 
     navigate("/");
   };
 
   return (
-    <div className="login-container">
-      <div className="login-wrap">
-        <h1 className="login-title">LOGIN</h1>
-        <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
+    <div className="auth-container">
+      <div className="auth-wrap">
+        <h1 className="auth-title">LOGIN</h1>
+        <form className="auth-form" onSubmit={(e) => handleSubmit(e)}>
           <AuthForm
             type="email"
             onChange={(e) => setEmail(e.target.value)}
@@ -51,8 +57,11 @@ export const Login = () => {
             errorCode={400}
             errorMsg="パスワードが正しくありません"
           />
-          <button className="login-button">LOGIN</button>
+          <button className="auth-button">LOGIN</button>
         </form>
+        <Link to="/register" className="link-text">
+          新規登録する
+        </Link>
       </div>
     </div>
   );

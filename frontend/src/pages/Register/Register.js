@@ -1,8 +1,9 @@
-import "./Register.css";
-import { useRef, useState } from "react";
+import "../Auth.css";
+import { useContext, useRef, useState } from "react";
 import { PostFetch } from "../../fetch";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthForm } from "../../components";
+import { UserContext } from "../../context/UserContext";
 
 export const Register = () => {
   const [name, setName] = useState("");
@@ -10,6 +11,7 @@ export const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isMatch, setIsMatch] = useState(false);
+  const { setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -25,17 +27,21 @@ export const Register = () => {
       password: password,
     });
 
-    const json = await res.json();
-    console.log(json);
+    const data = await res.json();
+    setUser({
+      name: data.name,
+      email: data.email,
+      isAccess: true,
+    });
 
     navigate("/");
   };
 
   return (
-    <div className="login-container">
-      <div className="login-wrap">
-        <h1 className="login-title">REGISTER</h1>
-        <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
+    <div className="auth-container">
+      <div className="auth-wrap">
+        <h1 className="auth-title">REGISTER</h1>
+        <form className="auth-form" onSubmit={(e) => handleSubmit(e)}>
           <AuthForm
             type="name"
             onChange={(e) => setName(e.target.value)}
@@ -72,8 +78,11 @@ export const Register = () => {
             errorCode={true}
             errorMsg="パスワードが一致しません"
           />
-          <button className="login-button">LOGIN</button>
+          <button className="auth-button">LOGIN</button>
         </form>
+        <Link to="/login" className="link-text">
+          ログインする
+        </Link>
       </div>
     </div>
   );

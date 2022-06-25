@@ -1,3 +1,5 @@
+import "./AuthForm.css";
+
 export const AuthForm = ({
   type,
   placeholder,
@@ -8,9 +10,9 @@ export const AuthForm = ({
   errorMsg,
 }) => {
   return (
-    <div className="form-item">
+    <div className="auth-item">
       <input
-        className="input-form"
+        className="auth-form"
         type={type}
         required
         placeholder={placeholder}

@@ -1,0 +1,20 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  width: 100%;
+  padding: 12px;
+}
+
+.auth-item {
+  margin-bottom: 24px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+@media screen and (max-width: 599px) {
+
+}
