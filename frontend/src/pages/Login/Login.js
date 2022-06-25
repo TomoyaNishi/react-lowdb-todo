@@ -1,22 +1,25 @@
 import "./Login.css";
-import { useRef } from "react";
+import { useState } from "react";
 import { PostFetch } from "../../fetch";
 import { useNavigate } from "react-router-dom";
+import { AuthForm } from "../../components";
 
 export const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const emailRef = useRef();
-  const passwordRef = useRef();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const res = await PostFetch("http://localhost:8080/auth/login", {
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
+      email: email,
+      password: password,
     });
 
     const isStatus = res.status === 200;
+    setError(res.status);
     if (!isStatus) return;
 
     navigate("/");
@@ -27,19 +30,23 @@ export const Login = () => {
       <div className="login-wrap">
         <h1 className="login-title">LOGIN</h1>
         <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
-          <input
-            className="login-input"
+          <AuthForm
             type="email"
-            required
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             placeholder="email"
-            ref={emailRef}
+            error={error}
+            errorCode={404}
+            errorMsg="入力した内容のユーザーが見つかりません"
           />
-          <input
-            className="login-input"
+          <AuthForm
             type="password"
-            required
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
             placeholder="password"
-            ref={passwordRef}
+            error={error}
+            errorCode={400}
+            errorMsg="パスワードが正しくありません"
           />
           <button className="login-button">LOGIN</button>
         </form>

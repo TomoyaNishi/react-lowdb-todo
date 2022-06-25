@@ -1,0 +1,35 @@
+.lists {
+  margin-top: 24px;
+}
+
+.list-item {
+  list-style: none;
+  text-align: left;
+  padding: 10px 0;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list-button-wrap {
+  display: flex;
+  margin-left: 12px;
+}
+
+.list-input {
+  width: 250px;
+  padding: 4px;
+}
+
+@media screen and (max-width: 599px) {
+  .list-text {
+    font-size: 12px;
+  }
+}

@@ -11,10 +11,6 @@
     {
       "id": 2,
       "text": "Task3"
-    },
-    {
-      "id": 3,
-      "text": "fasdf"
     }
   ],
   "users": [
@@ -23,6 +19,12 @@
       "name": "nishi",
       "email": "test1@test.com",
       "password": "123456"
+    },
+    {
+      "id": 1,
+      "name": "koharu",
+      "email": "test2@test.com",
+      "password": "abc"
     }
   ]
 }

@@ -78,6 +78,26 @@ app.delete("/todos", async function (req, res) {
   }
 });
 
+// USER SIGNUP
+app.post("/auth/register", async function (req, res) {
+  try {
+    const usersLength = users.length;
+    const user = {
+      id: usersLength !== 0 ? users.slice(-1)[0].id + 1 : 0,
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    };
+
+    users.push(user);
+    db.write();
+    res.send(user);
+    console.log(users);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 // USER LOGIN
 app.post("/auth/login", async function (req, res) {
   try {

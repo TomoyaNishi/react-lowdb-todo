@@ -1,5 +1,5 @@
 import "./Todo.css";
-import { Button, Input, Lists } from "../../components";
+import { Button, TodoInput, Lists } from "../../components";
 import { useEffect, useState } from "react";
 import { DeleteFetch, GetFetch, PostFetch } from "../../fetch";
 import { UpdateFetch } from "../../fetch/UpdateFetch";
@@ -50,8 +50,14 @@ export const Todo = () => {
   return (
     <div className="container">
       <div className="input-wrap">
-        <Input input={input} onClick={handleChange} />
-        <Button disabled={disabled} onClick={addTodo} text="ADD" />
+        <TodoInput input={input} onClick={handleChange} />
+        <Button
+          style="add-button"
+          disabled={disabled}
+          arg={disabled}
+          onClick={addTodo}
+          text="ADD"
+        />
       </div>
       <Lists lists={todos} clickUpdate={updateTodo} clickDelete={deleteTodo} />
     </div>

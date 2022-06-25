@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "./List.css";
+import { Button } from "../Button/Button";
 
 export const Lists = ({ lists, clickUpdate, clickDelete }) => {
   const [updateItem, setUpdateItem] = useState(null);
@@ -32,29 +34,29 @@ export const Lists = ({ lists, clickUpdate, clickDelete }) => {
               <p className="list-text">{list.text}</p>
             )}
             <div className="list-button-wrap">
-              <button
-                className={
+              <Button
+                style={
                   updateItem === list.id
                     ? "update-done-button"
                     : "update-button"
                 }
+                disabled={false}
+                arg={false}
                 onClick={
                   updateItem === list.id
                     ? () => handleUpdateDone(list.id)
                     : () => handleUpdate(list.id, list.text)
                 }
-              >
-                {updateItem === list.id ? "DONE" : "UPDATE"}
-              </button>
-              <button
-                className={
-                  updateItem ? "delete-button-disabled" : "delete-button"
-                }
+                text={updateItem === list.id ? "DONE" : "UPDATE"}
+              />
+
+              <Button
+                style={"delete-button"}
+                arg={updateItem !== null}
+                disabled={updateItem !== null ? true : false}
                 onClick={() => clickDelete(list.id)}
-                disabled={updateItem ? true : false}
-              >
-                DELETE
-              </button>
+                text={"DELETE"}
+              />
             </div>
           </li>
         );
