@@ -31,6 +31,9 @@ export const Login = () => {
       isAccess: true,
     });
 
+    sessionStorage.setItem("name", data.name);
+    sessionStorage.setItem("email", data.email);
+
     navigate("/");
   };
 

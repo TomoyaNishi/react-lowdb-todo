@@ -91,7 +91,7 @@ app.post("/auth/register", async function (req, res) {
 
     users.push(user);
     db.write();
-    res.send({ name: user.name, email: user.email });
+    res.send(user);
     console.log(users);
   } catch (err) {
     console.log(err);
@@ -110,8 +110,9 @@ app.post("/auth/login", async function (req, res) {
     if (!passwordCheck) return res.status(400).send("パスワードが正しくない");
 
     const user = users.find((user) => user.email === req.body.email);
+    console.log(user);
 
-    res.send({ name: user.name, email: user.email });
+    res.send(user);
   } catch (err) {
     console.log(err);
   }

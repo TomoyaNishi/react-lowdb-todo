@@ -34,6 +34,9 @@ export const Register = () => {
       isAccess: true,
     });
 
+    sessionStorage.setItem("name", data.name);
+    sessionStorage.setItem("email", data.email);
+
     navigate("/");
   };
 
