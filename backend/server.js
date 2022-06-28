@@ -1,4 +1,6 @@
 import express from "express";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 const app = express(); // インスタンス化してexpressの機能を使えるように
 const PORT = 8080;
 
@@ -82,11 +84,12 @@ app.delete("/todos", async function (req, res) {
 app.post("/auth/register", async function (req, res) {
   try {
     const usersLength = users.length;
+    const hashedPassword = await bcrypt.hash(req.body.password, 10); //reqのpasswordをhash化
     const user = {
       id: usersLength !== 0 ? users.slice(-1)[0].id + 1 : 0,
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
     };
 
     users.push(user);
@@ -101,16 +104,12 @@ app.post("/auth/register", async function (req, res) {
 // USER LOGIN
 app.post("/auth/login", async function (req, res) {
   try {
-    const isUser = users.some((user) => user.email === req.body.email);
-    if (!isUser) return res.status(404).send("ユーザーが見つからない");
-
-    const passwordCheck = users.some(
-      (user) => user.password === req.body.password
-    );
-    if (!passwordCheck) return res.status(400).send("パスワードが正しくない");
-
     const user = users.find((user) => user.email === req.body.email);
-    console.log(user);
+    if (!user) return res.status(404).send("ユーザーが見つからない");
+
+    //reqのpasswordとhash化したpasswordを照合
+    const compared = await bcrypt.compare(req.body.password, user.password);
+    if (!compared) return res.status(400).send("パスワードが正しくない");
 
     res.send(user);
   } catch (err) {

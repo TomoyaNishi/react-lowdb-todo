@@ -29,8 +29,8 @@
     {
       "id": 2,
       "name": "tomoya",
-      "email": "nishi@test.com",
-      "password": "123456"
+      "email": "example@test.com",
+      "password": "$2b$10$eOARJagagSOEA//fYKq1iuvvjDk5D5KY.1PUd7pwZVcW.0jQzVVCW"
     }
   ]
 }
