@@ -18,25 +18,25 @@ export const Todo = () => {
   const addTodo = async (e) => {
     e.preventDefault();
 
-    await PostFetch("http://localhost:8080/todos", { text: input });
-    GetFetch("http://localhost:8080/todos", setTodos);
+    await PostFetch("/todos", { text: input });
+    GetFetch("/todos", setTodos);
     setInput("");
     setDisabled(true);
   };
 
   const updateTodo = async (id, text) => {
-    await UpdateFetch("http://localhost:8080/todos", {
+    await UpdateFetch("/todos", {
       id: id,
       text: text,
     });
-    GetFetch("http://localhost:8080/todos", setTodos);
+    GetFetch("/todos", setTodos);
   };
 
   const deleteTodo = async (id) => {
-    await DeleteFetch("http://localhost:8080/todos", {
+    await DeleteFetch("/todos", {
       id: id,
     });
-    GetFetch("http://localhost:8080/todos", setTodos);
+    GetFetch("/todos", setTodos);
   };
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export const Todo = () => {
   });
 
   useEffect(() => {
-    GetFetch("http://localhost:8080/todos", setTodos);
+    GetFetch("/todos", setTodos);
   }, []);
 
   return (

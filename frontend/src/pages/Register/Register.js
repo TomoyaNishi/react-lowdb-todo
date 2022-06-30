@@ -21,7 +21,7 @@ export const Register = () => {
     setIsMatch(password !== confirmPassword);
     if (password !== confirmPassword) return;
 
-    const res = await PostFetch("http://localhost:8080/auth/register", {
+    const res = await PostFetch("/auth/register", {
       name: name,
       email: email,
       password: password,
@@ -29,13 +29,15 @@ export const Register = () => {
 
     const data = await res.json();
     setUser({
-      name: data.name,
-      email: data.email,
+      name: data.user.name,
+      email: data.user.email,
       isAccess: true,
     });
 
-    sessionStorage.setItem("name", data.name);
-    sessionStorage.setItem("email", data.email);
+    console.log(data.user);
+    console.log(data.token);
+
+    sessionStorage.setItem("name", data.user.name);
 
     navigate("/");
   };

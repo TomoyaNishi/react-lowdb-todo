@@ -15,7 +15,7 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await PostFetch("http://localhost:8080/auth/login", {
+    const res = await PostFetch("/auth/login", {
       email: email,
       password: password,
     });

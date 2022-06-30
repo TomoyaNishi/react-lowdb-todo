@@ -1,8 +1,12 @@
 import express from "express";
+// import jwt from "express-jwt";
+import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 const app = express(); // インスタンス化してexpressの機能を使えるように
 const PORT = 8080;
+dotenv.config();
+const jwtSecret = process.env.JWT_SECRET;
 
 // lowDB
 import { Low as low, JSONFile as FileSync } from "lowdb";
@@ -91,10 +95,13 @@ app.post("/auth/register", async function (req, res) {
       email: req.body.email,
       password: hashedPassword,
     };
-
     users.push(user);
+
+    const token = jwt.sign(req.body.email, jwtSecret);
+    res.cookie("token", token, { httpOnly: true });
+
     db.write();
-    res.send(user);
+    res.send({ user, token });
     console.log(users);
   } catch (err) {
     console.log(err);
