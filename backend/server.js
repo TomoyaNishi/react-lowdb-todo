@@ -32,6 +32,7 @@ app.use((req, res, next) => {
 // TODO取得
 app.get("/todos", (req, res) => {
   try {
+    console.log(req.headers.authorization);
     res.send(db.data.posts);
   } catch (err) {
     console.log(err);
@@ -118,7 +119,9 @@ app.post("/auth/login", async function (req, res) {
     const compared = await bcrypt.compare(req.body.password, user.password);
     if (!compared) return res.status(400).send("パスワードが正しくない");
 
-    res.send(user);
+    const token = jwt.sign(req.body.email, jwtSecret);
+
+    res.send({ user, token });
   } catch (err) {
     console.log(err);
   }

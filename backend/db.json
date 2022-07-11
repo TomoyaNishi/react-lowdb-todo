@@ -19,6 +19,12 @@
       "name": "nishi",
       "email": "test1@test.com",
       "password": "$2b$10$wcAS81rEktR2MTQnrfBI3.hrNW9xnhgpxR3vTahwULRAIu1I3YPZu"
+    },
+    {
+      "id": 1,
+      "name": "tomoya",
+      "email": "test2@test.com",
+      "password": "$2b$10$3Bp3hyzyGiYUwQBtiRfV8.n4EUBRPGAmpmsWiTCkVUHCWSdCv9se2"
     }
   ]
 }

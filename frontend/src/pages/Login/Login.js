@@ -26,13 +26,14 @@ export const Login = () => {
 
     const data = await res.json();
     setUser({
-      name: data.name,
-      email: data.email,
+      name: data.user.name,
+      email: data.user.email,
       isAccess: true,
     });
 
-    sessionStorage.setItem("name", data.name);
-    sessionStorage.setItem("email", data.email);
+    console.log(data.token);
+    sessionStorage.setItem("name", data.user.name);
+    sessionStorage.setItem("email", data.user.email);
 
     navigate("/");
   };
