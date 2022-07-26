@@ -1,12 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 
-const sessionName = sessionStorage.getItem("name");
-const sessionEmail = sessionStorage.getItem("email");
+const sessionToken = sessionStorage.getItem("token");
 
 const initialState = {
-  name: sessionName,
-  email: sessionEmail,
-  isAccess: sessionName && sessionEmail ? true : false,
+  token: sessionToken,
+  isAccess: sessionToken ? true : false,
 };
 
 export const UserContext = createContext(initialState);

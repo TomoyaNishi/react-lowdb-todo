@@ -25,15 +25,15 @@ export const Login = () => {
     setError(res.status);
 
     const data = await res.json();
+    sessionStorage.setItem("token", data.token);
+
+    // ここでGETする
+
     setUser({
-      name: data.user.name,
-      email: data.user.email,
+      name: data.name,
+      email: data.email,
       isAccess: true,
     });
-
-    console.log(data.token);
-    sessionStorage.setItem("name", data.user.name);
-    sessionStorage.setItem("email", data.user.email);
 
     navigate("/");
   };

@@ -8,6 +8,7 @@ import { UserContext } from "../../context/UserContext";
 export const Todo = () => {
   const [input, setInput] = useState("");
   const [todos, setTodos] = useState([]);
+  const [state, setState] = useState([]);
   const [disabled, setDisabled] = useState(true);
   const { user, setUser } = useContext(UserContext);
 
