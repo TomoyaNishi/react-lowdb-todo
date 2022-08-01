@@ -29,15 +29,12 @@ export const Register = () => {
 
     const data = await res.json();
     setUser({
-      name: data.user.name,
-      email: data.user.email,
+      name: data.name,
       isAccess: true,
     });
 
-    console.log(data.user);
-    console.log(data.token);
-
-    sessionStorage.setItem("name", data.user.name);
+    sessionStorage.setItem("token", data.token);
+    sessionStorage.setItem("name", data.name);
 
     navigate("/");
   };

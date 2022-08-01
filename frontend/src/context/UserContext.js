@@ -1,9 +1,11 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 const sessionToken = sessionStorage.getItem("token");
+const sessionName = sessionStorage.getItem("name");
 
 const initialState = {
   token: sessionToken,
+  name: sessionName,
   isAccess: sessionToken ? true : false,
 };
 

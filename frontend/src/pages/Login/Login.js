@@ -26,12 +26,10 @@ export const Login = () => {
 
     const data = await res.json();
     sessionStorage.setItem("token", data.token);
-
-    // ここでGETする
+    sessionStorage.setItem("name", data.name);
 
     setUser({
       name: data.name,
-      email: data.email,
       isAccess: true,
     });
 
