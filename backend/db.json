@@ -1,12 +1,34 @@
 {
   "posts": [
     {
-      "id": 0,
-      "text": "Task1"
+      "id": 1,
+      "uid": 0,
+      "text": "Task2"
     },
     {
-      "id": 1,
-      "text": "Task2"
+      "id": 2,
+      "uid": 1,
+      "text": "dasffsdfas"
+    },
+    {
+      "id": 3,
+      "uid": 0,
+      "text": "sdfas"
+    },
+    {
+      "id": 4,
+      "uid": 1,
+      "text": "ddd"
+    },
+    {
+      "id": 5,
+      "uid": 1,
+      "text": "aaaddd"
+    },
+    {
+      "id": 6,
+      "uid": 2,
+      "text": "sdfasd"
     }
   ],
   "users": [
@@ -21,6 +43,12 @@
       "name": "tomoya",
       "email": "test2@test.com",
       "password": "$2b$10$3Bp3hyzyGiYUwQBtiRfV8.n4EUBRPGAmpmsWiTCkVUHCWSdCv9se2"
+    },
+    {
+      "id": 2,
+      "name": "koha",
+      "email": "test3@test.com",
+      "password": "$2b$10$DaT.CkS1AfNKDaKkklz3n.wl32FZR9BTmRj.M/AQww1ZQNoj9bprG"
     }
   ]
 }

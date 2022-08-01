@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 const app = express();
 const PORT = 8080;
 dotenv.config();
-const jwtSecret = process.env.JWT_SECRET;
+const JWS_SECRET_KEY = process.env.JWT_SECRET;
 
 // lowDB
 import { Low as low, JSONFile as FileSync } from "lowdb";
@@ -32,19 +32,13 @@ app.use((req, res, next) => {
 // TODO取得
 app.get("/todos", async (req, res) => {
   try {
-    const authHeader = req.headers["authorization"];
-    // const token = authHeader && authHeader.split(" ")[1];
-    console.log({ authHeader });
-    // console.log({ token });
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.json({ error: "header error" });
 
-    // 一致しているか
-    // jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
-    //   if (err) return res.sendStatus(403);
-    //   req.tokenData = decoded;
-    //   next();
-    // });
+    const token = jwt.verify(authHeader, JWS_SECRET_KEY).id;
+    const userPosts = posts.filter((post) => post.uid === token);
 
-    res.json(db.data.posts);
+    res.json(userPosts);
   } catch (err) {
     console.log(err);
   }
@@ -53,10 +47,18 @@ app.get("/todos", async (req, res) => {
 // TODO追加
 app.post("/todos", async function (req, res) {
   try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.json({ error: "header error" });
+
+    const token = jwt.verify(authHeader, JWS_SECRET_KEY).id;
+    console.log(jwt.verify(authHeader, JWS_SECRET_KEY));
+    console.log(authHeader);
+    console.log(token);
+
     const postsLength = posts.length;
     const id = postsLength !== 0 ? posts.slice(-1)[0].id + 1 : 0;
     const text = req.body.text;
-    await posts.push({ id: id, text: text });
+    await posts.push({ id: id, uid: token, text: text });
     db.write();
     res.json({});
   } catch (err) {
@@ -70,7 +72,7 @@ app.put("/todos", async function (req, res) {
     const id = req.body.id;
     const text = req.body.text;
     const newPosts = posts.map((post) =>
-      post.id === id ? { id: post.id, text: text } : post
+      post.id === id ? { ...post, text: text } : post
     );
     db.data.posts = newPosts;
     db.write();
@@ -106,12 +108,11 @@ app.post("/auth/register", async function (req, res) {
     };
     users.push(user);
 
-    const token = jwt.sign(req.body.email, jwtSecret);
+    const token = jwt.sign(req.body.email, JWS_SECRET_KEY);
     res.cookie("token", token, { httpOnly: true });
 
     db.write();
-    res.json({ user, token });
-    console.log(users);
+    res.json({ name: user.name, token });
   } catch (err) {
     console.log(err);
   }
@@ -127,11 +128,11 @@ app.post("/auth/login", async function (req, res) {
     const compared = await bcrypt.compare(req.body.password, user.password);
     if (!compared) return res.status(400).json("パスワードが正しくない");
 
-    const token = jwt.sign({ id: user.id }, "reactExpressLowDB20220630", {
+    const token = jwt.sign({ id: user.id }, JWS_SECRET_KEY, {
       expiresIn: "1800s",
     });
 
-    res.json({ token });
+    res.json({ name: user.name, token });
   } catch (err) {
     console.log(err);
   }
