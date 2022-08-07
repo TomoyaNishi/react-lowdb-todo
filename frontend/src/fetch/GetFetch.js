@@ -5,6 +5,5 @@ export const GetFetch = async (url, setState) => {
     headers: { Authorization: token },
   });
   const data = await res.json();
-  console.log(data);
   setState(data);
 };

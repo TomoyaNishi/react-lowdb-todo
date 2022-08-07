@@ -41,7 +41,7 @@ function tokenMatch(req, res) {
 app.get("/todos", async (req, res) => {
   try {
     const token = tokenMatch(req, res);
-    const userPosts = posts.filter((post) => post.uid === token);
+    const userPosts = db.data.posts.filter((post) => post.uid === token);
 
     res.json(userPosts);
   } catch (err) {

@@ -15,28 +15,28 @@ export const Todo = () => {
     setInput(e.target.value);
   };
 
-  const addTodo = (e) => {
+  const addTodo = async (e) => {
     e.preventDefault();
 
-    PostFetch("/todos", { text: input });
-    GetFetch("/todos", setTodos);
+    await PostFetch("/todos", { text: input });
+    await GetFetch("/todos", setTodos);
     setInput("");
     setDisabled(true);
   };
 
-  const updateTodo = (id, text) => {
-    UpdateFetch("/todos", {
+  const updateTodo = async (id, text) => {
+    await UpdateFetch("/todos", {
       id: id,
       text: text,
     });
-    GetFetch("/todos", setTodos);
+    await GetFetch("/todos", setTodos);
   };
 
-  const deleteTodo = (id) => {
-    DeleteFetch("/todos", {
+  const deleteTodo = async (id) => {
+    await DeleteFetch("/todos", {
       id: id,
     });
-    GetFetch("/todos", setTodos);
+    await GetFetch("/todos", setTodos);
   };
 
   useEffect(() => {
