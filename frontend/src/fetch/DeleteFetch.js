@@ -1,9 +1,8 @@
 export const DeleteFetch = async (url, option) => {
-  await fetch(url, {
+  const token = sessionStorage.getItem("token");
+  return await fetch(url, {
     method: "DELETE",
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
+    headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify(option),
   });
 };

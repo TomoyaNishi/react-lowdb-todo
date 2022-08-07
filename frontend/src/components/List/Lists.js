@@ -12,7 +12,9 @@ export const Lists = ({ lists, clickUpdate, clickDelete }) => {
   };
 
   const handleUpdateDone = (id) => {
-    clickUpdate(id, inputValue) && setUpdateItem(null) && setInputValue("");
+    clickUpdate(id, inputValue);
+    setUpdateItem(null);
+    setInputValue("");
   };
 
   const handleChange = (e) => {

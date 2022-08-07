@@ -1,34 +1,24 @@
 {
   "posts": [
     {
+      "id": 0,
+      "uid": 0,
+      "text": "aaaa1111"
+    },
+    {
       "id": 1,
       "uid": 0,
-      "text": "Task2"
+      "text": "dddd"
     },
     {
       "id": 2,
-      "uid": 1,
-      "text": "dasffsdfas"
+      "uid": 0,
+      "text": "aaadd"
     },
     {
       "id": 3,
       "uid": 0,
-      "text": "sdfas"
-    },
-    {
-      "id": 4,
-      "uid": 1,
-      "text": "ddd"
-    },
-    {
-      "id": 5,
-      "uid": 1,
-      "text": "aaaddd"
-    },
-    {
-      "id": 6,
-      "uid": 2,
-      "text": "sdfasd"
+      "text": "bbbbb"
     }
   ],
   "users": [

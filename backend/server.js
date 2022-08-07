@@ -29,13 +29,18 @@ app.use((req, res, next) => {
   next();
 });
 
+function tokenMatch(req, res) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) return res.json({ error: "header error" });
+
+  const token = jwt.verify(authHeader, JWS_SECRET_KEY).id;
+  return token;
+}
+
 // TODO取得
 app.get("/todos", async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) return res.json({ error: "header error" });
-
-    const token = jwt.verify(authHeader, JWS_SECRET_KEY).id;
+    const token = tokenMatch(req, res);
     const userPosts = posts.filter((post) => post.uid === token);
 
     res.json(userPosts);
@@ -47,14 +52,7 @@ app.get("/todos", async (req, res) => {
 // TODO追加
 app.post("/todos", async function (req, res) {
   try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) return res.json({ error: "header error" });
-
-    const token = jwt.verify(authHeader, JWS_SECRET_KEY).id;
-    console.log(jwt.verify(authHeader, JWS_SECRET_KEY));
-    console.log(authHeader);
-    console.log(token);
-
+    const token = tokenMatch(req, res);
     const postsLength = posts.length;
     const id = postsLength !== 0 ? posts.slice(-1)[0].id + 1 : 0;
     const text = req.body.text;
